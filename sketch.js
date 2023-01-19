@@ -6,7 +6,7 @@ function preload(){
 }
 
 function setup() {
-  createCanvas(300,300);
+  createCanvas(400,400);
   start_button = new ImageButton(start_img,200,200,50,50);
   test_button = new RectButton("green",100,100,50,50);
   textFont("Comic Sans MS")
@@ -93,11 +93,14 @@ function game_init(){
     real_index = 0
     for(var i = 0;i<(stage+1);i++){
       for(var j = 0;j<(stage+1);j++){
-        
+        modify = 120-stage*12
+        if(modify <= 0){
+          modify = 12
+        }
         t_color = color(
-          ref_color[0]+120,
-          ref_color[1]+120,
-          ref_color[2]+120
+          ref_color[0]+modify,
+          ref_color[1]+modify,
+          ref_color[2]+modify
         );
         //print(color(255,255,255))
         print(i*20,j*20);
