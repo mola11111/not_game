@@ -87,7 +87,7 @@ function game_init(){
     /*for(a in field){
       field[a] = new Array(stage+1);
     }*/
-    ref_color = [random(0,255),random(0,255),random(0,255)];
+    ref_color = [random(0,200),random(0,200),random(0,200)];
     answer = floor(random(0,(stage+1)*(stage+1)));
     print("answer",answer);
     real_index = 0
@@ -95,13 +95,13 @@ function game_init(){
       for(var j = 0;j<(stage+1);j++){
         
         t_color = color(
-          ref_color[0]+80,
-          ref_color[1]+80,
-          ref_color[2]+80
+          ref_color[0]+120,
+          ref_color[1]+120,
+          ref_color[2]+120
         );
         //print(color(255,255,255))
         print(i*20,j*20);
-        field[i][j] = new RectButton(color(ref_color[0],ref_color[1],ref_color[2]),i*(width/(stage+1)),j*(height/(stage+1)),25,25);
+        field[i][j] = new RectButton(color(ref_color[0],ref_color[1],ref_color[2]),i*(width/(stage+1)),j*(height/(stage+1)),25-stage,25-stage);
         print(i,j)
         if(real_index++==answer){
           print("there is answer")
