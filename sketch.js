@@ -29,7 +29,7 @@ function preload(){
 function setup() {
   screenResize();
   createCanvas(screenWidth,screenHeight);
-  start_button = new ImageButton(start_img,200,200,50,50);
+  start_button = new ImageButton(start_img,200,200,60,60);
   test_button = new RectButton("green",100,100,50,50);
   textFont("Comic Sans MS")
   noStroke();
@@ -84,9 +84,9 @@ function end_screen(){
 function main_screen(){
   background('pink');
   fill('black');
-  textSize(20);
+  textSize(40);
   
-  text("Find a different color",width/2-100,height*0.4);
+  text("Find a different color",width/2-200,height*0.4);
   start_button.pos(width/2-30,height*0.5);
   start_button.draw();
   if(start_button.click()){
@@ -147,7 +147,7 @@ function game_init(){
         
         //print(color(255,255,255))
         
-        field[i][j] = new RectButton(color(ref_color[0],ref_color[1],ref_color[2]),i*(width/(stage+1)),j*(height/(stage+1)),30-stage,30-stage);
+        field[i][j] = new RectButton(color(ref_color[0],ref_color[1],ref_color[2]),i*(width/(stage+1)),j*(height/(stage+1)),40-stage,40-stage);
         if(real_index++==answer){
           modify = 200-stage*10;
           if(modify < 40){
