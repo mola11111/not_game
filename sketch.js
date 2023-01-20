@@ -59,7 +59,7 @@ function end_screen(){
   background('pink');
   textSize(20);
   fill("black");
-  text("결과 : 스테이지 "+stage,width*0.4,height*0.1);
+  text((stage -1 ==0) ? ":(" : "result : Stage "+(stage-1) ,width*0.4,height*0.1);
   
   re = new ImageButton(re_img,width*0.3,height*0.3,50,50);
   home = new ImageButton(start_img3,width*0.6,height*0.3,50,50);
