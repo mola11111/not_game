@@ -1,3 +1,12 @@
+const minScreenWidth = 200
+const minScreenHeight = 200
+var screenWidth = 0;
+var screenHeight = 0;
+
+function screenResize(){
+  screenWidth = (windowWidth < minScreenWidth) ? minScreenWidth : windowWidth;
+  screenHeight = (windowHeight < minScreenHeight) ? minScreenHeight : windowHeight;
+}
 
 function preload(){
   start_img = loadImage("assets/modern_button/sector12.png");
@@ -6,7 +15,8 @@ function preload(){
 }
 
 function setup() {
-  createCanvas(400,400);
+  screenResize();
+  createCanvas(screenWidth,screenHeight);
   start_button = new ImageButton(start_img,200,200,50,50);
   test_button = new RectButton("green",100,100,50,50);
   textFont("Comic Sans MS")
@@ -21,6 +31,8 @@ var mouse = false;
 var field = [];
 
 function draw() {
+  screenResize();
+  resizeCanvas(screenWidth,screenHeight);
   // switch(screen_status){
   //   case 'main' : main_screen(); break;
   //   case 'game' : game_screen(); break;
@@ -40,8 +52,8 @@ function main_screen(){
   fill('black');
   textSize(20);
   
-  text("Find a different color",50,100);
-  start_button.pos(125,150);
+  text("Find a different color",width/2-100,height*0.4);
+  start_button.pos(width/2-30,height*0.5);
   start_button.draw();
   if(start_button.click()){
     // field = [];
@@ -103,11 +115,11 @@ function game_init(){
           ref_color[2]+modify
         );
         //print(color(255,255,255))
-        print(i*20,j*20);
+        
         field[i][j] = new RectButton(color(ref_color[0],ref_color[1],ref_color[2]),i*(width/(stage+1)),j*(height/(stage+1)),25-stage,25-stage);
-        print(i,j)
         if(real_index++==answer){
-          print("there is answer")
+          print(i,j );
+          print("there is answer");
           field[i][j].answer = true;
           field[i][j].color = t_color;
         }
@@ -126,9 +138,10 @@ function game_screen(){
   //   screen_status = 'main';
   // }
   background("black");
-  for(buttons of field){
-    for(button of buttons){
-      button.draw();
+  for(buttons in field){
+    for(button in field[buttons]){
+      field[buttons][button].pos(buttons*(width/(stage+1)),button*(height/(stage+1)));
+      field[buttons][button].draw();
     }
   }
   for(game_buttons of field){
