@@ -122,11 +122,11 @@ function game_init(){
         
         //print(color(255,255,255))
         
-        field[i][j] = new RectButton(color(ref_color[0],ref_color[1],ref_color[2]),i*(width/(stage+1)),j*(height/(stage+1)),40-stage,40-stage);
+        field[i][j] = new RectButton(color(ref_color[0],ref_color[1],ref_color[2]),i*(width/(stage+1)),j*(height/(stage+1)),(40-(button_count-1)),(40-(button_count-1)));
         if(real_index++==answer){
           modify = 200-stage*10;
-          if(modify < 40){
-            modify = 40
+          if(modify < 30){
+            modify = 30
           }
           t_color = color(
             ref_color[0]+modify,
@@ -193,7 +193,7 @@ function game_screen(){
   rect(width*0.95,0,width*0.1,(time/maxTime)*height);
   fill('white');
   textSize(15);
-  text(floor(time)+1,width*0.85,20);
+  text("time : "+(floor(time)+1)+"\nStage : "+(stage),width*0.85,20);
 
 }
 
