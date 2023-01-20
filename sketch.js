@@ -3,6 +3,15 @@ const minScreenHeight = 200
 var screenWidth = 0;
 var screenHeight = 0;
 
+var screen_status = 'main';
+var answer = -1;
+var stage = 1;
+var ref_color = [];
+var mouse = false;
+var field = [];
+const maxTime = 10;
+var time = 0;
+var tempTime = 0;
 function screenResize(){
   screenWidth = (windowWidth < minScreenWidth) ? minScreenWidth : windowWidth;
   screenHeight = (windowHeight < minScreenHeight) ? minScreenHeight : windowHeight;
@@ -26,15 +35,7 @@ function setup() {
   noStroke();
 }
 
-var screen_status = 'main';
-var answer = -1;
-var stage = 1;
-var ref_color = [];
-var mouse = false;
-var field = [];
-const maxTime = 5;
-var time = 0;
-var tempTime = 0;
+
 
 function draw() {
   screenResize();
@@ -120,6 +121,7 @@ function main_screen(){
     //   }
     // }
       time = maxTime;
+      stage = 1;
       game_init();
       screen_status = 'game';
   }
@@ -136,7 +138,7 @@ function game_init(){
     /*for(a in field){
       field[a] = new Array(stage+1);
     }*/
-    ref_color = [random(0,255-(200-stage*10)),random(0,255-(200-stage*10)),random(0,255-(200-stage*10))];
+    ref_color = [random(10,255-(200-stage*10)),random(10,255-(200-stage*10)),random(10,255-(200-stage*10))];
     answer = floor(random(0,(stage+1)*(stage+1)));
     print("answer",answer);
     real_index = 0
@@ -205,6 +207,9 @@ function game_screen(){
           time += 3;
           game_init();
         }
+        else{
+          time--;
+        }
       }
     }
     //console.log(game_button);
@@ -221,3 +226,4 @@ function game_screen(){
 function mousePressed(){
   //console.log("a");
 }
+
