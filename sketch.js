@@ -12,6 +12,7 @@ var field = [];
 const maxTime = 10;
 var time = 0;
 var tempTime = 0;
+const maxButtonCount = 10
 function screenResize(){
   screenWidth = (windowWidth < minScreenWidth) ? minScreenWidth : windowWidth;
   screenHeight = (windowHeight < minScreenHeight) ? minScreenHeight : windowHeight;
@@ -90,36 +91,6 @@ function main_screen(){
   start_button.pos(width/2-30,height*0.5);
   start_button.draw();
   if(start_button.click()){
-    // field = [];
-    // //console.log("asdf");
-    // for(var i=0; i<stage+1; i++)field[i]=[]
-    // /*for(a in field){
-    //   field[a] = new Array(stage+1);
-    // }*/
-    // ref_color = [random(0,255),random(0,255),random(0,255)];
-    // answer = floor(random(0,(stage+1)*(stage+1)));
-    // print("answer",answer);
-    // real_index = 0
-    // for(var i = 0;i<(stage+1);i++){
-    //   for(var j = 0;j<(stage+1);j++){
-        
-    //     t_color = color(
-    //       ref_color[0]+80,
-    //       ref_color[1]+80,
-    //       ref_color[2]+80
-    //     );
-    //     //print(color(255,255,255))
-    //     print(i*20,j*20);
-    //     field[i][j] = new RectButton(color(ref_color[0],ref_color[1],ref_color[2]),i*50,j*50,25,25);
-    //     print(i,j)
-    //     if(real_index++==answer){
-    //       print("there is answer")
-    //       field[i][j].answer = true;
-    //       field[i][j].color = t_color;
-    //     }
-        
-    //   }
-    // }
       time = maxTime;
       stage = 1;
       game_init();
@@ -134,16 +105,20 @@ function game_init(){
   }
   field = [];
     //console.log("asdf");
-    for(var i=0; i<stage+1; i++)field[i]=[]
+    button_count = stage+1;
+    if(button_count >= maxButtonCount){
+      button_count = maxButtonCount;
+    }
+    for(var i=0; i<button_count; i++)field[i]=[]
     /*for(a in field){
       field[a] = new Array(stage+1);
     }*/
     ref_color = [random(10,255-(200-stage*10)),random(10,255-(200-stage*10)),random(10,255-(200-stage*10))];
-    answer = floor(random(0,(stage+1)*(stage+1)));
+    answer = floor(random(0,button_count**2));
     print("answer",answer);
     real_index = 0
-    for(var i = 0;i<(stage+1);i++){
-      for(var j = 0;j<(stage+1);j++){
+    for(var i = 0;i<button_count;i++){
+      for(var j = 0;j<button_count;j++){
         
         //print(color(255,255,255))
         
@@ -193,7 +168,7 @@ function game_screen(){
   
   for(buttons in field){
     for(button in field[buttons]){
-      field[buttons][button].pos(buttons*(width*0.8/(stage+1)),button*(height/(stage+1)));
+      field[buttons][button].pos(buttons*(width*0.8/button_count),button*(height/button_count));
       field[buttons][button].draw();
     }
   }
@@ -215,7 +190,7 @@ function game_screen(){
     //console.log(game_button);
   }
   fill('red');
-  rect(width*0.9,0,width*0.1,(time/maxTime)*height);
+  rect(width*0.95,0,width*0.1,(time/maxTime)*height);
   fill('white');
   textSize(15);
   text(floor(time)+1,width*0.85,20);
